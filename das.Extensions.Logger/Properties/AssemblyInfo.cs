@@ -4,12 +4,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("das.Logger")]
+[assembly: AssemblyTitle("das.Extensions.Logger")]
 [assembly: AssemblyDescription("Логирование")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("das (Дьяконов Александр)")]
-[assembly: AssemblyProduct("das.Logger")]
-[assembly: AssemblyCopyright("Copyright © das (Дьяконов Александр) 2018")]
+[assembly: AssemblyProduct("das.Extensions.Logger")]
+[assembly: AssemblyCopyright("Copyright © das (Дьяконов Александр) 2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
