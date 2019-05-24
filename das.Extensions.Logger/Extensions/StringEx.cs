@@ -1,8 +1,8 @@
 ﻿namespace das.Extensions.Logger.Extensions
 {
-    public static class StringEx
+    internal static class StringEx
     {
-        public static string ValueOrDefault(this string value, string defaultValue)
+        internal static string ValueOrDefault(this string value, string defaultValue)
         {
             return !string.IsNullOrEmpty(value) ? value : defaultValue;
         }

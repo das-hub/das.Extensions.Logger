@@ -3,18 +3,18 @@ using System.Text.RegularExpressions;
 
 namespace das.Extensions.Logger
 {
-    public class DataBinder
+    internal class DataBinder
     {
         private readonly LogEvent _event;
         private readonly string _format;
 
-        public DataBinder(LogEvent e, string format)
+        internal DataBinder(LogEvent e, string format)
         {
             _event = e;
             _format = format;
         }
 
-        public DataBinder Set(string marker, Func<LogEvent, object> prop)
+        internal DataBinder Set(string marker, Func<LogEvent, object> prop)
         {
             string pattern = @"{" + marker + @"(?<format>(.*?))}";
 
@@ -31,7 +31,7 @@ namespace das.Extensions.Logger
             return new DataBinder(_event, regex.Replace(_format, result));
         }
 
-        public string Result()
+        internal string Result()
         {
             return _format;
         }

@@ -1,13 +1,13 @@
 ﻿namespace das.Extensions.Logger.Extensions
 {
-    public static class LogEventEx
+    internal static class LogEventEx
     {
-        public static DataBinder Bind(this LogEvent e, string format)
+        internal static DataBinder Bind(this LogEvent e, string format)
         {
             return new DataBinder(e, format);
         }
 
-        public static string LevelToString(this LogEvent e)
+        internal static string LevelToString(this LogEvent e)
         {
             switch (e.Level)
             {
