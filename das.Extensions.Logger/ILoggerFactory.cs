@@ -6,40 +6,40 @@ namespace das.Extensions.Logger
 {
     public interface ILoggerFactory
     {
-        ILogger CreateLogger(string source = null, LoggerSetting setting = null);
-        ILogger ReconfigureLogger(string source, LoggerSetting setting);
+        ILogger CreateLogger(string source = null, LogProvider provider = null);
+        ILogger ReconfigureLogger(string source, LogProvider provider);
     }
 
     public class LoggerFactory : ILoggerFactory
     {
-        private readonly Dictionary<string, Logger> _loggers = new Dictionary<string, Logger>(StringComparer.Ordinal);
-        private readonly LoggerSetting _defaultSetting;
+        private readonly Dictionary<string, ILogger> _loggers = new Dictionary<string, ILogger>(StringComparer.Ordinal);
+        private readonly LogProvider _defaultProvider;
 
-        public LoggerFactory(LoggerSetting setting)
+        public LoggerFactory(LogProvider provider)
         {
-            _defaultSetting = setting;
+            _defaultProvider = provider;
         }
 
-        public static ILoggerFactory CreateFactory(LoggerSetting setting)
+        public static ILoggerFactory CreateFactory(LogProvider provider)
         {
-            return new LoggerFactory(setting);
+            return new LoggerFactory(provider);
         }
 
-        public ILogger CreateLogger(string source = null, LoggerSetting setting = null)
+        public ILogger CreateLogger(string source = null, LogProvider provider = null)
         {
-            return AddLogger(source.ValueOrDefault(AppEnv.Name), setting ?? _defaultSetting);
+            return AddLogger(source.ValueOrDefault(AppEnv.Name), provider ?? _defaultProvider);
         }
 
-        public ILogger ReconfigureLogger(string source, LoggerSetting setting)
+        public ILogger ReconfigureLogger(string source, LogProvider provider)
         {
             if (_loggers.ContainsKey(source)) _loggers.Remove(source);
-            return AddLogger(source, setting);
+            return AddLogger(source, provider);
         }
 
-        private ILogger AddLogger(string source, LoggerSetting setting)
+        private ILogger AddLogger(string source, LogProvider provider)
         {
             if (!_loggers.ContainsKey(source))
-                _loggers.Add(source, Logger.Log(source, setting));
+                _loggers.Add(source, Logger.Log(source, provider));
 
             return _loggers[source];
         }

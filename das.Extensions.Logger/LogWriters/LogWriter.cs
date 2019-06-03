@@ -1,4 +1,5 @@
-﻿using System.Xml.Serialization;
+﻿using System.Collections.Generic;
+using System.Xml.Serialization;
 
 namespace das.Extensions.Logger.LogWriters
 {
@@ -37,4 +38,6 @@ namespace das.Extensions.Logger.LogWriters
 
         protected abstract void WriteLine(LogEvent logEvent);
     }
+
+    public class Writers : List<LogWriter> { }
 }

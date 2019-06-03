@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
-using das.Extensions.Logger.LogWriters;
 
-namespace das.Extensions.Logger
+namespace das.Extensions.Logging
 {
     public static class AppEnv
     {
@@ -16,6 +15,4 @@ namespace das.Extensions.Logger
             return Directory.CreateDirectory(Path).FullName;
         }
     }
-
-    public class Writers : List<LogWriter> { }
 }

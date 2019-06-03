@@ -2,9 +2,9 @@
 
 namespace das.Extensions.Logger.Extensions
 {
-    public static class LoggerSettingEx
+    public static class LogProviderEx
     {
-        public static LoggerSetting AddConsole(this LoggerSetting setting, string name="", string format = "", bool info=true, bool error = true, bool warn = true, bool debug = true)
+        public static LogProvider AddConsole(this LogProvider provider, string name="", string format = "", bool info=true, bool error = true, bool warn = true, bool debug = true)
         {
             ConsoleLogWriter writer = new ConsoleLogWriter
             {
@@ -16,12 +16,12 @@ namespace das.Extensions.Logger.Extensions
                 IsWarn = warn
             };
 
-            setting.Writers.Add(writer);
+            provider.Writers.Add(writer);
 
-            return setting; 
+            return provider; 
         }
 
-        public static LoggerSetting AddFile(this LoggerSetting setting, string name = "", string format = "", bool info = true, bool error = true, bool warn = true, bool debug = true)
+        public static LogProvider AddFile(this LogProvider provider, string name = "", string format = "", bool info = true, bool error = true, bool warn = true, bool debug = true)
         {
             FileLogWriter writer = new FileLogWriter
             {
@@ -33,12 +33,12 @@ namespace das.Extensions.Logger.Extensions
                 IsWarn = warn
             };
 
-            setting.Writers.Add(writer);
+            provider.Writers.Add(writer);
 
-            return setting;
+            return provider;
         }
 
-        public static LoggerSetting AddEveryDayFile(this LoggerSetting setting, string name = "", string format = "", bool info = true, bool error = true, bool warn = true, bool debug = true)
+        public static LogProvider AddEveryDayFile(this LogProvider provider, string name = "", string format = "", bool info = true, bool error = true, bool warn = true, bool debug = true)
         {
             EveryDayFileLogWriter writer = new EveryDayFileLogWriter
             {
@@ -50,12 +50,12 @@ namespace das.Extensions.Logger.Extensions
                 IsWarn = warn
             };
 
-            setting.Writers.Add(writer);
+            provider.Writers.Add(writer);
 
-            return setting;
+            return provider;
         }
 
-        public static LoggerSetting AddDebug(this LoggerSetting setting, string name = "", string format = "", bool info = true, bool error = true, bool warn = true, bool debug = true)
+        public static LogProvider AddDebug(this LogProvider provider, string name = "", string format = "", bool info = true, bool error = true, bool warn = true, bool debug = true)
         {
             DebugLogWriter writer = new DebugLogWriter
             {
@@ -67,9 +67,9 @@ namespace das.Extensions.Logger.Extensions
                 IsWarn = warn
             };
 
-            setting.Writers.Add(writer);
+            provider.Writers.Add(writer);
 
-            return setting;
+            return provider;
         }
     }
 }

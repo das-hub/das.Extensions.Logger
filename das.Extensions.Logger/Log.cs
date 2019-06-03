@@ -1,8 +1,8 @@
-﻿using das.Extensions.Logger.LogWriters;
+﻿using das.Extensions.Logging.LogWriters;
 
-namespace das.Extensions.Logger
+namespace das.Extensions.Logging
 {
-    public interface ILogger
+    public interface ILog
     {
         void Info(string message);
         void Warn(string message);
@@ -23,25 +23,25 @@ namespace das.Extensions.Logger
         void ErrorIf(bool condition, string source, string message);
     }
 
-    internal class Logger : ILogger
+    internal class Log : ILog
     {
         private readonly string _source;
-        private readonly LogProvider _provider;
+        private readonly LoggerSetting _setting;
 
-        internal Logger(string source, LogProvider provider)
+        internal Logging(string source, LoggerSetting setting)
         {
             _source = source;
-            _provider = provider;
+            _setting = setting;
         }
 
-        internal static Logger Log(string source, LogProvider writers)
+        internal static Logging Log(string source, LoggerSetting setting)
         {
-            return new Logger(source, writers);
+            return new Logging(source, setting);
         }
 
         internal void WriteEvent(LogEvent logEvent)
         {
-            foreach (LogWriter writer in _provider.Writers)
+            foreach (LogWriter writer in _setting.Writers)
             {
                 writer.WriteEvent(logEvent);
             }

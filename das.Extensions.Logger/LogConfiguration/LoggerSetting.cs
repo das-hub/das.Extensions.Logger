@@ -1,13 +1,13 @@
 ﻿using System.Xml.Serialization;
-using das.Extensions.Logger.LogWriters;
+using das.Extensions.Logging.LogWriters;
 
-namespace das.Extensions.Logger
+namespace das.Extensions.Logging.LogConfiguration
 {
-    public class LoggerSetting
+    public class LogWriters
     {
-        public static LoggerSetting Empty => new LoggerSetting();
+        public static LogWriters Empty => new LogWriters();
 
-        public LoggerSetting()
+        public LogWriters()
         {
             Writers = new Writers();
         }
