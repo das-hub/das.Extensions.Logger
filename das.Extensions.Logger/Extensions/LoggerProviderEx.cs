@@ -2,9 +2,9 @@
 
 namespace das.Extensions.Logger.Extensions
 {
-    public static class LogProviderEx
+    public static class LoggerProviderEx
     {
-        public static LogProvider AddConsole(this LogProvider provider, string name="", string format = "", bool info=true, bool error = true, bool warn = true, bool debug = true)
+        public static LoggerProvider AddConsole(this LoggerProvider provider, string name="", string format = "", bool info=true, bool error = true, bool warn = true, bool debug = true)
         {
             ConsoleLogWriter writer = new ConsoleLogWriter
             {
@@ -21,7 +21,7 @@ namespace das.Extensions.Logger.Extensions
             return provider; 
         }
 
-        public static LogProvider AddFile(this LogProvider provider, string name = "", string format = "", bool info = true, bool error = true, bool warn = true, bool debug = true)
+        public static LoggerProvider AddFile(this LoggerProvider provider, string name = "", string format = "", bool info = true, bool error = true, bool warn = true, bool debug = true)
         {
             FileLogWriter writer = new FileLogWriter
             {
@@ -38,7 +38,7 @@ namespace das.Extensions.Logger.Extensions
             return provider;
         }
 
-        public static LogProvider AddEveryDayFile(this LogProvider provider, string name = "", string format = "", bool info = true, bool error = true, bool warn = true, bool debug = true)
+        public static LoggerProvider AddEveryDayFile(this LoggerProvider provider, string name = "", string format = "", bool info = true, bool error = true, bool warn = true, bool debug = true)
         {
             EveryDayFileLogWriter writer = new EveryDayFileLogWriter
             {
@@ -55,7 +55,7 @@ namespace das.Extensions.Logger.Extensions
             return provider;
         }
 
-        public static LogProvider AddDebug(this LogProvider provider, string name = "", string format = "", bool info = true, bool error = true, bool warn = true, bool debug = true)
+        public static LoggerProvider AddDebug(this LoggerProvider provider, string name = "", string format = "", bool info = true, bool error = true, bool warn = true, bool debug = true)
         {
             DebugLogWriter writer = new DebugLogWriter
             {

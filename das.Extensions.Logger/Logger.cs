@@ -26,15 +26,15 @@ namespace das.Extensions.Logger
     internal class Logger : ILogger
     {
         private readonly string _source;
-        private readonly LogProvider _provider;
+        private readonly LoggerProvider _provider;
 
-        internal Logger(string source, LogProvider provider)
+        internal Logger(string source, LoggerProvider provider)
         {
             _source = source;
             _provider = provider;
         }
 
-        internal static Logger Log(string source, LogProvider writers)
+        internal static Logger Log(string source, LoggerProvider writers)
         {
             return new Logger(source, writers);
         }

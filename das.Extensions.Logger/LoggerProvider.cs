@@ -3,11 +3,11 @@ using das.Extensions.Logger.LogWriters;
 
 namespace das.Extensions.Logger
 {
-    public class LogProvider
+    public class LoggerProvider
     {
-        public static LogProvider Empty => new LogProvider();
+        public static LoggerProvider Empty => new LoggerProvider();
 
-        public LogProvider()
+        public LoggerProvider()
         {
             Writers = new Writers();
         }

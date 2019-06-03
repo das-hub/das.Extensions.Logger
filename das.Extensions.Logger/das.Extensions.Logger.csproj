@@ -53,8 +53,8 @@
     <Compile Include="LogWriters\EveryDayFileLogWriter.cs" />
     <Compile Include="LogWriters\FileLogWriter.cs" />
     <Compile Include="LogWriters\LogWriter.cs" />
-    <Compile Include="Extensions\LogProviderEx.cs" />
-    <Compile Include="LogProvider.cs" />
+    <Compile Include="Extensions\LoggerProviderEx.cs" />
+    <Compile Include="LoggerProvider.cs" />
     <Compile Include="LogLevel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
