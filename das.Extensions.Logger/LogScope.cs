@@ -11,7 +11,7 @@ namespace das.Extensions.Logger
         {
             _source = $"{source}:[{scope}]";
             _logger = logger;
-            _logger.Info($" Группа событий ({_source}) - запущена");
+            _logger.Info($" Инициирована группа событий ({_source})");
         }
 
         public void Info(string message)
@@ -61,7 +61,7 @@ namespace das.Extensions.Logger
 
         public void Dispose()
         {
-            _logger.Info($" Группа событий ({_source}) - завершена");
+            _logger.Info($" Завершена группа событий ({_source})");
         }
     }
 }

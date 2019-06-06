@@ -1,5 +1,4 @@
-﻿using System.Diagnostics.SymbolStore;
-using das.Extensions.Logger.LogWriters;
+﻿using das.Extensions.Logger.LogWriters;
 
 namespace das.Extensions.Logger
 {
