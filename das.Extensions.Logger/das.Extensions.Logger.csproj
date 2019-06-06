@@ -47,6 +47,7 @@
     <Compile Include="LogEvent.cs" />
     <Compile Include="LogCommon.cs" />
     <Compile Include="Logger.cs" />
+    <Compile Include="LogScope.cs" />
     <Compile Include="LogWriters\ConsoleLogWriter.cs" />
     <Compile Include="LogWriters\DebugLogWriter.cs" />
     <Compile Include="LogWriters\EventLogWriter.cs" />
