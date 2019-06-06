@@ -4,34 +4,33 @@ namespace das.Extensions.Logger
 {
     public class LogScope : ILogger, IDisposable
     {
-        private readonly string _source;
         private readonly Logger _logger;
+        private readonly string _scope;
 
-        internal LogScope(string source, Logger logger, string scope)
+        internal LogScope(Logger logger, string scope)
         {
-            _source = $"{source}:[{scope}]";
+            _scope = $"{scope}";
             _logger = logger;
-            _logger.Info($" Инициирована группа событий ({_source})");
         }
 
         public void Info(string message)
         {
-            _logger.WriteEvent(LogEvent.Create(LogLevel.Info, _source, message));
+            _logger.Info($"{_scope} => {message}");
         }
 
         public void Warn(string message)
         {
-            _logger.WriteEvent(LogEvent.Create(LogLevel.Warning, _source, message));
+            _logger.Warn($"{_scope} => {message}");
         }
 
         public void Debug(string message)
         {
-            _logger.WriteEvent(LogEvent.Create(LogLevel.Debug, _source, message));
+            _logger.Debug($"{_scope} => {message}");
         }
 
         public void Error(string message)
         {
-            _logger.WriteEvent(LogEvent.Create(LogLevel.Error, _source, message));
+            _logger.Error($"{_scope} => {message}");
         }
 
         public void InfoIf(bool condition, string message)
@@ -54,14 +53,11 @@ namespace das.Extensions.Logger
             if (condition) Error(message);
         }
 
-        LogScope ILogger.BeginScope(string scope)
+        public LogScope BeginScope(string scope)
         {
-            throw new NotImplementedException();
+            return new LogScope(_logger, $"{_scope} => {scope}");
         }
 
-        public void Dispose()
-        {
-            _logger.Info($" Завершена группа событий ({_source})");
-        }
+        public void Dispose(){ }
     }
 }

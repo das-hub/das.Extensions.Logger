@@ -30,7 +30,7 @@ namespace das.Extensions.Logger
 
         public LogScope BeginScope(string scope)
         {
-            return new LogScope(_source, this, scope);
+            return new LogScope(this, scope);
         }
 
         internal static Logger Log(string source, LoggerProvider writers)
