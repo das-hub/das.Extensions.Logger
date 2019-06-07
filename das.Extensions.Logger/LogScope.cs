@@ -58,6 +58,6 @@ namespace das.Extensions.Logger
             return new LogScope(_logger, $"{_scope} => {scope}");
         }
 
-        public void Dispose(){ }
+        void IDisposable.Dispose() { }
     }
 }
