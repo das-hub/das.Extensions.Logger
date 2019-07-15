@@ -40,10 +40,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstractions\ILogger.cs" />
+    <Compile Include="Abstractions\ILoggerFactory.cs" />
+    <Compile Include="Abstractions\ILogScope.cs" />
     <Compile Include="DataBinder.cs" />
     <Compile Include="Extensions\LogEventEx.cs" />
     <Compile Include="Extensions\StringEx.cs" />
-    <Compile Include="ILoggerFactory.cs" />
+    <Compile Include="LoggerFactory.cs" />
     <Compile Include="LogEvent.cs" />
     <Compile Include="LogCommon.cs" />
     <Compile Include="Logger.cs" />

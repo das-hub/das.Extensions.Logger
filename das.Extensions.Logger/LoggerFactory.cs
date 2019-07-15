@@ -1,15 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using das.Extensions.Logger.Abstractions;
 using das.Extensions.Logger.Extensions;
 
 namespace das.Extensions.Logger
 {
-    public interface ILoggerFactory
-    {
-        ILogger CreateLogger(string source = null, LoggerProvider provider = null);
-        ILogger ReconfigureLogger(string source, LoggerProvider provider);
-    }
-
     public class LoggerFactory : ILoggerFactory
     {
         private readonly Dictionary<string, ILogger> _loggers = new Dictionary<string, ILogger>(StringComparer.Ordinal);

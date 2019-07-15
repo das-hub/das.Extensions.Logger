@@ -1,8 +1,9 @@
 ﻿using System;
+using das.Extensions.Logger.Abstractions;
 
 namespace das.Extensions.Logger
 {
-    public class LogScope : ILogger, IDisposable
+    public class LogScope : ILogScope
     {
         private readonly Logger _logger;
         private readonly string _scope;
@@ -53,7 +54,7 @@ namespace das.Extensions.Logger
             if (condition) Error(message);
         }
 
-        public LogScope BeginScope(string scope)
+        public ILogScope BeginScope(string scope)
         {
             return new LogScope(_logger, $"{_scope} => {scope}");
         }
