@@ -54,7 +54,7 @@
     <Compile Include="LogWriters\ConsoleLogWriter.cs" />
     <Compile Include="LogWriters\DebugLogWriter.cs" />
     <Compile Include="LogWriters\EventLogWriter.cs" />
-    <Compile Include="LogWriters\EveryDayFileLogWriter.cs" />
+    <Compile Include="LogWriters\DailyFileLogWriter.cs" />
     <Compile Include="LogWriters\FileLogWriter.cs" />
     <Compile Include="LogWriters\LogWriter.cs" />
     <Compile Include="Extensions\LoggerProviderEx.cs" />

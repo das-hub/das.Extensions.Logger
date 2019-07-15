@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Xml.Serialization;
 
 namespace das.Extensions.Logger.LogWriters
@@ -7,32 +8,39 @@ namespace das.Extensions.Logger.LogWriters
     {
         private readonly object _lock = new object();
 
+        public Func<LogEvent, bool> Condition;
+
+        protected LogWriter()
+        {
+            Condition = logEvent => string.IsNullOrEmpty(Source)
+                ? logEvent.Level >= MinLevel
+                : logEvent.Source.Contains(Source) && logEvent.Level >= MinLevel;
+        }
+
         [XmlAttribute("name")]
         public string Name { get; set; }
-
-        [XmlAttribute("debug")]
-        public bool IsDebug { get; set; }
-
-        [XmlAttribute("info")]
-        public bool IsInfo { get; set; }
-
-        [XmlAttribute("error")]
-        public bool IsError { get; set; }
-
-        [XmlAttribute("warn")]
-        public bool IsWarn { get; set; }
 
         [XmlAttribute("format")]
         public string Format { get; set; }
 
+        [XmlAttribute("source")]
+        public string Source { get; set; }
+
+        [XmlAttribute("min-level")]
+        public LogLevel MinLevel { get; set; } = LogLevel.Error;
+
+        protected bool IsEnabled(LogEvent logEvent)
+        {
+            return Condition == null || Condition(logEvent);
+        }
+
         public void WriteEvent(LogEvent logEvent)
         {
+            if (!IsEnabled(logEvent)) return;
+
             lock (_lock)
             {
-                if (IsDebug && logEvent.Level == LogLevel.Debug) WriteLine(logEvent);
-                if (IsInfo && logEvent.Level == LogLevel.Info) WriteLine(logEvent);
-                if (IsWarn && logEvent.Level == LogLevel.Warning) WriteLine(logEvent);
-                if (IsError && logEvent.Level == LogLevel.Error) WriteLine(logEvent);
+                WriteLine(logEvent);
             }
         }
 

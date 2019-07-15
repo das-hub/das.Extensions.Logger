@@ -13,7 +13,7 @@ namespace das.Extensions.Logger
         }
 
         [XmlElement("console", typeof(ConsoleLogWriter))]
-        [XmlElement("everyday-file", typeof(EveryDayFileLogWriter))]
+        [XmlElement("daily-file", typeof(DailyFileLogWriter))]
         [XmlElement("file", typeof(FileLogWriter))]
         [XmlElement("system", typeof(EventLogWriter))]
         [XmlElement("debug", typeof(DebugLogWriter))]

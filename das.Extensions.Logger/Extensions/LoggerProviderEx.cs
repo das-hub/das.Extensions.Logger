@@ -1,19 +1,18 @@
-﻿using das.Extensions.Logger.LogWriters;
+﻿using System;
+using das.Extensions.Logger.LogWriters;
 
 namespace das.Extensions.Logger.Extensions
 {
     public static class LoggerProviderEx
     {
-        public static LoggerProvider AddConsole(this LoggerProvider provider, string name="", string format = "", bool info=true, bool error = true, bool warn = true, bool debug = true)
+        public static LoggerProvider AddConsole(this LoggerProvider provider, string name="", string source = "", string format = "", LogLevel minLevel = LogLevel.Info, Func<LogEvent, bool> condition = null)
         {
-            ConsoleLogWriter writer = new ConsoleLogWriter
-            {
+            ConsoleLogWriter writer = new ConsoleLogWriter{
                 Name = name,
                 Format = format,
-                IsDebug = debug,
-                IsError = error,
-                IsInfo = info,
-                IsWarn = warn
+                Source = source,
+                MinLevel = minLevel,
+                Condition = condition
             };
 
             provider.Writers.Add(writer);
@@ -21,16 +20,15 @@ namespace das.Extensions.Logger.Extensions
             return provider; 
         }
 
-        public static LoggerProvider AddFile(this LoggerProvider provider, string name = "", string format = "", bool info = true, bool error = true, bool warn = true, bool debug = true)
+        public static LoggerProvider AddFile(this LoggerProvider provider, string name = "", string source = "", string format = "", LogLevel minLevel = LogLevel.Info, Func<LogEvent, bool> condition = null)
         {
             FileLogWriter writer = new FileLogWriter
             {
                 Name = name,
                 Format = format,
-                IsDebug = debug,
-                IsError = error,
-                IsInfo = info,
-                IsWarn = warn
+                Source = source,
+                MinLevel = minLevel,
+                Condition = condition
             };
 
             provider.Writers.Add(writer);
@@ -38,16 +36,15 @@ namespace das.Extensions.Logger.Extensions
             return provider;
         }
 
-        public static LoggerProvider AddEveryDayFile(this LoggerProvider provider, string name = "", string format = "", bool info = true, bool error = true, bool warn = true, bool debug = true)
+        public static LoggerProvider AddDailyFile(this LoggerProvider provider, string name = "", string source = "", string format = "", LogLevel minLevel = LogLevel.Info, Func<LogEvent, bool> condition = null)
         {
-            EveryDayFileLogWriter writer = new EveryDayFileLogWriter
+            DailyFileLogWriter writer = new DailyFileLogWriter
             {
                 Name = name,
                 Format = format,
-                IsDebug = debug,
-                IsError = error,
-                IsInfo = info,
-                IsWarn = warn
+                Source = source,
+                MinLevel = minLevel,
+                Condition = condition
             };
 
             provider.Writers.Add(writer);
@@ -55,16 +52,15 @@ namespace das.Extensions.Logger.Extensions
             return provider;
         }
 
-        public static LoggerProvider AddDebug(this LoggerProvider provider, string name = "", string format = "", bool info = true, bool error = true, bool warn = true, bool debug = true)
+        public static LoggerProvider AddDebug(this LoggerProvider provider, string name = "", string source = "", string format = "", LogLevel minLevel = LogLevel.Info, Func<LogEvent, bool> condition = null)
         {
             DebugLogWriter writer = new DebugLogWriter
             {
                 Name = name,
                 Format = format,
-                IsDebug = debug,
-                IsError = error,
-                IsInfo = info,
-                IsWarn = warn
+                Source = source,
+                MinLevel = minLevel,
+                Condition = condition
             };
 
             provider.Writers.Add(writer);
