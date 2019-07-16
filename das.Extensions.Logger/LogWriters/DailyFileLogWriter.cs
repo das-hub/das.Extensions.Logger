@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using das.Extensions.Logger.Extensions;
 
 namespace das.Extensions.Logger.LogWriters
 {
@@ -7,16 +8,11 @@ namespace das.Extensions.Logger.LogWriters
     {
         private readonly object _sync = new object();
 
-        public override void WriteEvent(LogEvent logEvent)
+        public override void WriteEvent(LogEvent logEvent, LoggerEnvironment environment)
         {
-            string LogFile()
-            {
-                return Path.Combine(AppEnv.GetPath(), AppEnv.GetDailyLogFileName(Name));
-            }
-
             lock (_sync)
             {
-                File.AppendAllText(LogFile(), logEvent.ToString(Format) + Environment.NewLine);
+                File.AppendAllText(environment.GetLogFile(environment.GetDailyLogFileName(Name)), logEvent.ToString(Format) + Environment.NewLine);
             }
         }
     }

@@ -6,11 +6,11 @@ namespace das.Extensions.Logger.LogWriters
     {
         private EventLog _eventLog;
         
-        private void EventLogInit()
+        private void EventLogInit(LoggerEnvironment environment)
         {
             if (_eventLog != null) return;
 
-            string source = string.IsNullOrEmpty(Name) ? $"{AppEnv.Name}" : $"{AppEnv.Name}({Name})";
+            string source = string.IsNullOrEmpty(Name) ? $"{environment.AppName}" : $"{environment.AppName}({Name})";
 
             if (!EventLog.SourceExists(source))
             {
@@ -23,9 +23,9 @@ namespace das.Extensions.Logger.LogWriters
             };
         }
 
-        public override void WriteEvent(LogEvent logEvent)
+        public override void WriteEvent(LogEvent logEvent, LoggerEnvironment environment)
         {
-            EventLogInit();
+            EventLogInit(environment);
 
             EventLogEntryType type = EventLogEntryType.Information;
 

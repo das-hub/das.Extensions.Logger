@@ -4,7 +4,7 @@ namespace das.Extensions.Logger.LogWriters
 {
     public class ConsoleLogWriter : LogWriter
     {
-        public override void WriteEvent(LogEvent logEvent)
+        public override void WriteEvent(LogEvent logEvent, LoggerEnvironment environment)
         {
             switch (logEvent.Level)
             {

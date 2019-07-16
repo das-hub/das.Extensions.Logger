@@ -36,7 +36,7 @@ namespace das.Extensions.Logger.LogWriters
             return Condition == null || Condition(logEvent);
         }
 
-        public abstract void WriteEvent(LogEvent logEvent);
+        public abstract void WriteEvent(LogEvent logEvent, LoggerEnvironment environment);
     }
 
     public class Writers : List<LogWriter> { }

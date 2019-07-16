@@ -7,11 +7,13 @@ namespace das.Extensions.Logger
     {
         private readonly string _source;
         private readonly LoggerProvider _provider;
+        private readonly LoggerEnvironment _environment;
 
-        internal Logger(string source, LoggerProvider provider)
+        internal Logger(string source, LoggerProvider provider, LoggerEnvironment environment)
         {
             _source = source;
             _provider = provider;
+            _environment = environment;
         }
 
         public ILogScope BeginScope(string scope)
@@ -19,16 +21,16 @@ namespace das.Extensions.Logger
             return new LogScope(this, scope);
         }
 
-        internal static Logger Log(string source, LoggerProvider writers)
+        internal static Logger Log(string source, LoggerProvider writers, LoggerEnvironment environment)
         {
-            return new Logger(source, writers);
+            return new Logger(source, writers, environment);
         }
 
         internal void WriteEvent(LogEvent logEvent)
         {
             foreach (LogWriter writer in _provider.Writers)
             {
-                if (writer.IsEnabled(logEvent)) writer.WriteEvent(logEvent);
+                if (writer.IsEnabled(logEvent)) writer.WriteEvent(logEvent, _environment);
             }
         }
 

@@ -45,10 +45,11 @@
     <Compile Include="Abstractions\ILogScope.cs" />
     <Compile Include="DataBinder.cs" />
     <Compile Include="Extensions\LogEventEx.cs" />
+    <Compile Include="Extensions\LoggerEnvironmentEx.cs" />
     <Compile Include="Extensions\StringEx.cs" />
     <Compile Include="LoggerFactory.cs" />
     <Compile Include="LogEvent.cs" />
-    <Compile Include="LogCommon.cs" />
+    <Compile Include="LoggerEnvironment.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="LogScope.cs" />
     <Compile Include="LogWriters\ConsoleLogWriter.cs" />

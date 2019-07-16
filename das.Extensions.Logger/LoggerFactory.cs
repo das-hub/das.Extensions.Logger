@@ -8,6 +8,7 @@ namespace das.Extensions.Logger
     public class LoggerFactory : ILoggerFactory
     {
         private readonly Dictionary<string, ILogger> _loggers = new Dictionary<string, ILogger>(StringComparer.Ordinal);
+        private readonly LoggerEnvironment _environment = new LoggerEnvironment();
         private readonly LoggerProvider _defaultProvider;
 
         public LoggerFactory(LoggerProvider provider)
@@ -22,7 +23,7 @@ namespace das.Extensions.Logger
 
         public ILogger CreateLogger(string source = null, LoggerProvider provider = null)
         {
-            return AddLogger(source.ValueOrDefault(AppEnv.Name), provider ?? _defaultProvider);
+            return AddLogger(source.ValueOrDefault(_environment.AppName), provider ?? _defaultProvider);
         }
 
         public ILogger ReconfigureLogger(string source, LoggerProvider provider)
@@ -34,7 +35,7 @@ namespace das.Extensions.Logger
         private ILogger AddLogger(string source, LoggerProvider provider)
         {
             if (!_loggers.ContainsKey(source))
-                _loggers.Add(source, Logger.Log(source, provider));
+                _loggers.Add(source, Logger.Log(source, provider, _environment));
 
             return _loggers[source];
         }
