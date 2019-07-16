@@ -5,22 +5,24 @@ namespace das.Extensions.Logger.Extensions
 {
     public static class LoggerProviderEx
     {
-        public static LoggerProvider AddConsole(this LoggerProvider provider, string name="", string source = "", string format = "", LogLevel minLevel = LogLevel.Info, Func<LogEvent, bool> condition = null)
+        public static LoggerProvider AddConsole(this LoggerProvider provider, string name="", string source = "", string format = "", LogLevel minLevel = LogLevel.Info, LogLevel maxLevel = LogLevel.Info, Func<LogEvent, bool> condition = null)
         {
             ConsoleLogWriter writer = new ConsoleLogWriter{
                 Name = name,
                 Format = format,
                 Source = source,
                 MinLevel = minLevel,
-                Condition = condition
+                MaxLevel = maxLevel,
             };
+
+            if (condition != null) writer.Condition = condition;
 
             provider.Writers.Add(writer);
 
             return provider; 
         }
 
-        public static LoggerProvider AddFile(this LoggerProvider provider, string name = "", string source = "", string format = "", LogLevel minLevel = LogLevel.Info, Func<LogEvent, bool> condition = null)
+        public static LoggerProvider AddFile(this LoggerProvider provider, string name = "", string source = "", string format = "", LogLevel minLevel = LogLevel.Info, LogLevel maxLevel = LogLevel.Info, Func<LogEvent, bool> condition = null)
         {
             FileLogWriter writer = new FileLogWriter
             {
@@ -28,15 +30,17 @@ namespace das.Extensions.Logger.Extensions
                 Format = format,
                 Source = source,
                 MinLevel = minLevel,
-                Condition = condition
+                MaxLevel = maxLevel,
             };
+
+            if (condition != null) writer.Condition = condition;
 
             provider.Writers.Add(writer);
 
             return provider;
         }
 
-        public static LoggerProvider AddDailyFile(this LoggerProvider provider, string name = "", string source = "", string format = "", LogLevel minLevel = LogLevel.Info, Func<LogEvent, bool> condition = null)
+        public static LoggerProvider AddDailyFile(this LoggerProvider provider, string name = "", string source = "", string format = "", LogLevel minLevel = LogLevel.Info, LogLevel maxLevel = LogLevel.Info, Func<LogEvent, bool> condition = null)
         {
             DailyFileLogWriter writer = new DailyFileLogWriter
             {
@@ -44,15 +48,17 @@ namespace das.Extensions.Logger.Extensions
                 Format = format,
                 Source = source,
                 MinLevel = minLevel,
-                Condition = condition
+                MaxLevel = maxLevel,
             };
+
+            if (condition != null) writer.Condition = condition;
 
             provider.Writers.Add(writer);
 
             return provider;
         }
 
-        public static LoggerProvider AddDebug(this LoggerProvider provider, string name = "", string source = "", string format = "", LogLevel minLevel = LogLevel.Info, Func<LogEvent, bool> condition = null)
+        public static LoggerProvider AddDebug(this LoggerProvider provider, string name = "", string source = "", string format = "", LogLevel minLevel = LogLevel.Info, LogLevel maxLevel = LogLevel.Info, Func<LogEvent, bool> condition = null)
         {
             DebugLogWriter writer = new DebugLogWriter
             {
@@ -60,8 +66,10 @@ namespace das.Extensions.Logger.Extensions
                 Format = format,
                 Source = source,
                 MinLevel = minLevel,
-                Condition = condition
+                MaxLevel = maxLevel,
             };
+
+            if (condition != null) writer.Condition = condition;
 
             provider.Writers.Add(writer);
 

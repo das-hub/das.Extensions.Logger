@@ -1,4 +1,5 @@
 ﻿using das.Extensions.Logger.Abstractions;
+using das.Extensions.Logger.LogWriters;
 
 namespace das.Extensions.Logger
 {
@@ -25,7 +26,7 @@ namespace das.Extensions.Logger
 
         internal void WriteEvent(LogEvent logEvent)
         {
-            foreach (ILogWriter writer in _provider.Writers)
+            foreach (LogWriter writer in _provider.Writers)
             {
                 if (writer.IsEnabled(logEvent)) writer.WriteEvent(logEvent);
             }

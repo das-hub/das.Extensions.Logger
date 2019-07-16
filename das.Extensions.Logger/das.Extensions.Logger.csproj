@@ -43,7 +43,6 @@
     <Compile Include="Abstractions\ILogger.cs" />
     <Compile Include="Abstractions\ILoggerFactory.cs" />
     <Compile Include="Abstractions\ILogScope.cs" />
-    <Compile Include="Abstractions\ILogWriter.cs" />
     <Compile Include="DataBinder.cs" />
     <Compile Include="Extensions\LogEventEx.cs" />
     <Compile Include="Extensions\StringEx.cs" />

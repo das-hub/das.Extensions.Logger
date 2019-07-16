@@ -1,19 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Xml.Serialization;
-using das.Extensions.Logger.Abstractions;
 
 namespace das.Extensions.Logger.LogWriters
 {
-    public abstract class LogWriter : ILogWriter
+    public abstract class LogWriter
     {
+        [XmlIgnore]
         public Func<LogEvent, bool> Condition;
 
         protected LogWriter()
         {
             Condition = logEvent => string.IsNullOrEmpty(Source)
-                ? logEvent.Level >= MinLevel
-                : logEvent.Source.Contains(Source) && logEvent.Level >= MinLevel;
+                ? logEvent.Level >= MinLevel && logEvent.Level <= MaxLevel 
+                : logEvent.Source.Contains(Source) && logEvent.Level >= MinLevel && logEvent.Level <= MaxLevel;
         }
 
         [XmlAttribute("name")]
@@ -28,6 +28,9 @@ namespace das.Extensions.Logger.LogWriters
         [XmlAttribute("min-level")]
         public LogLevel MinLevel { get; set; } = LogLevel.Error;
 
+        [XmlAttribute("max-level")]
+        public LogLevel MaxLevel { get; set; } = LogLevel.Error;
+
         public bool IsEnabled(LogEvent logEvent)
         {
             return Condition == null || Condition(logEvent);
@@ -36,5 +39,5 @@ namespace das.Extensions.Logger.LogWriters
         public abstract void WriteEvent(LogEvent logEvent);
     }
 
-    public class Writers : List<ILogWriter> { }
+    public class Writers : List<LogWriter> { }
 }
