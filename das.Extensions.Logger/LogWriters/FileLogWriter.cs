@@ -5,16 +5,19 @@ namespace das.Extensions.Logger.LogWriters
 {
     public class FileLogWriter : LogWriter
     {
-        protected override void WriteLine(LogEvent logEvent)
+        private readonly object _sync = new object();
+
+        public override void WriteEvent(LogEvent logEvent)
         {
             string LogFile()
             {
-                return Path.Combine(AppEnv.GetPath(), string.IsNullOrEmpty(Name) ? $"{AppEnv.Name}.log" : $"{AppEnv.Name}({Name}).log");
+                return Path.Combine(AppEnv.GetPath(), AppEnv.GetLogFileName(Name));
             }
-            
-            File.AppendAllText(LogFile(),
-                logEvent.ToString(Format) +
-                Environment.NewLine);
+
+            lock (_sync)
+            {
+                File.AppendAllText(LogFile(), logEvent.ToString(Format) + Environment.NewLine);
+            }
         }
     }
 }

@@ -13,5 +13,15 @@ namespace das.Extensions.Logger
         {
             return Directory.CreateDirectory(Path).FullName;
         }
+
+        public static string GetLogFileName(string name)
+        {
+            return string.IsNullOrEmpty(name) ? $"{Name}.log" : $"{Name}({name}).log";
+        }
+
+        public static string GetDailyLogFileName(string name)
+        {
+            return string.IsNullOrEmpty(name) ? $"{Name}[{DateTime.Now:yyyy-MM-dd}].log" : $"{Name}({name})[{DateTime.Now:yyyy-MM-dd}].log";
+        }
     }
 }

@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Xml.Serialization;
+using das.Extensions.Logger.Abstractions;
 
 namespace das.Extensions.Logger.LogWriters
 {
-    public abstract class LogWriter
+    public abstract class LogWriter : ILogWriter
     {
-        private readonly object _lock = new object();
-
         public Func<LogEvent, bool> Condition;
 
         protected LogWriter()
@@ -29,23 +28,13 @@ namespace das.Extensions.Logger.LogWriters
         [XmlAttribute("min-level")]
         public LogLevel MinLevel { get; set; } = LogLevel.Error;
 
-        protected bool IsEnabled(LogEvent logEvent)
+        public bool IsEnabled(LogEvent logEvent)
         {
             return Condition == null || Condition(logEvent);
         }
 
-        public void WriteEvent(LogEvent logEvent)
-        {
-            if (!IsEnabled(logEvent)) return;
-
-            lock (_lock)
-            {
-                WriteLine(logEvent);
-            }
-        }
-
-        protected abstract void WriteLine(LogEvent logEvent);
+        public abstract void WriteEvent(LogEvent logEvent);
     }
 
-    public class Writers : List<LogWriter> { }
+    public class Writers : List<ILogWriter> { }
 }

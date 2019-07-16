@@ -23,7 +23,7 @@ namespace das.Extensions.Logger.LogWriters
             };
         }
 
-        protected override void WriteLine(LogEvent logEvent)
+        public override void WriteEvent(LogEvent logEvent)
         {
             EventLogInit();
 

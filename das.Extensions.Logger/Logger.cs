@@ -26,9 +26,9 @@ namespace das.Extensions.Logger
 
         internal void WriteEvent(LogEvent logEvent)
         {
-            foreach (LogWriter writer in _provider.Writers)
+            foreach (ILogWriter writer in _provider.Writers)
             {
-                writer.WriteEvent(logEvent);
+                if (writer.IsEnabled(logEvent)) writer.WriteEvent(logEvent);
             }
         }
 
